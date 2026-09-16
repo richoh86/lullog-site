@@ -26,10 +26,43 @@
 <body>
 <h1>Privacy Policy</h1>
 <p class="sub">Lullog: Baby Feeding Tracker · Last updated 16 September 2026</p>
-<p class="lede"><strong>TODO — describe exactly what this app collects, why, and
-who it is shared with.</strong> Every category listed here must match the App
-Privacy answers in App Store Connect, or the app will be rejected.</p>
+<p class="lede"><strong>Lullog keeps your baby's log on your phone.</strong> Nothing leaves the device unless you turn on sharing. There are no accounts, no ads, no analytics, no tracking, and no third-party SDKs.</p>
+
+<h2>What the app stores on your phone</h2>
+<ul>
+  <li>Your baby's name and date of birth (both optional; you can use "Baby").</li>
+  <li>The entries you log: feeds (breast side, duration, bottle or pumped amount), sleep times, diaper changes, and any note you type.</li>
+  <li>Your settings, such as feeding style and whether you completed onboarding.</li>
+</ul>
+<p>This data is stored in the app's own container on your iPhone and is included in your normal iPhone backups. It is not written to iCloud by the app, and the app does not use HealthKit.</p>
+
+<h2>Sharing with caregivers (optional, off by default)</h2>
+<p>Lullog can create a private web link so a partner, grandparent, or sitter can see and add entries from any browser without installing anything. This only happens after you tap <strong>Connect to sync</strong> in Settings → Share with caregivers. Until then the app makes no network requests at all.</p>
+<p>When sharing is on:</p>
+<ul>
+  <li>Your baby's name, date of birth, feeding style, and the log entries are sent to and stored on our relay server, hosted on Cloudflare Workers and Cloudflare D1.</li>
+  <li>Access is controlled by random, unguessable link tokens. Anyone who has a link can see the log; a link you set to "Can view and log" can also add entries. There are no accounts or passwords.</li>
+  <li>The server keeps a per-device identifier (a random ID from your iPhone, or the link token for web caregivers) on each entry so devices can merge changes. It stores no email, phone number, or payment data.</li>
+  <li>You can revoke any link at any time. <strong>Stop sharing</strong> revokes every link and stops all network traffic; your log stays on your phone.</li>
+</ul>
+<p>The relay stores only what is needed to show the log to the people you invited. We do not read, sell, or use it for anything else.</p>
+
+<h2>Purchases</h2>
+<p>Lullog Lifetime is a one-time purchase handled entirely by Apple through the App Store. We never see your payment details. Apple's privacy policy applies to the transaction.</p>
+
+<h2>Deleting your data</h2>
+<ul>
+  <li><strong>On your phone:</strong> Settings → Delete all data removes every entry, your baby's details, and all settings. Deleting the app does the same.</li>
+  <li><strong>On the relay:</strong> Stop sharing revokes all links. To have the relay copy of your log erased as well, email us from the address below with the share link (or its token) and we will delete it within 30 days.</li>
+</ul>
+
+<h2>Children</h2>
+<p>Lullog is used by parents and caregivers, not by children. The log describes an infant, but the app collects no information from the infant and no information that identifies the child beyond the name you choose to enter.</p>
+
+<h2>Changes</h2>
+<p>If a future version collects anything beyond what is described here, this page will be updated before that version ships, and the App Privacy details on the App Store will match it.</p>
+
 <h2>Contact</h2><p>Questions: <a href="mailto:richohios@gmail.com">richohios@gmail.com</a></p>
-<footer>© 2026 Lullog: Baby Feeding Tracker. All rights reserved.</footer>
+<footer><a href="support.html">Support</a> · © 2026 Lullog. All rights reserved.</footer>
 </body>
 </html>
