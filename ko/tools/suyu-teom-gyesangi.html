@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>수유텀 계산기 · 24시간 수유 스케줄 | Lullog</title>
+<meta name="description" content="아기 월령과 마지막 수유 시각만 넣으면 다음 수유 시각부터 24시간 수유 스케줄 표를 만들어 드립니다. 분유 수유량 추정과 결과 링크 공유까지 무료입니다.">
+<link rel="canonical" href="https://richoh86.github.io/lullog-site/ko/tools/suyu-teom-gyesangi.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lullog">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="수유텀 계산기 · 24시간 수유 스케줄">
+<meta property="og:description" content="아기 월령과 마지막 수유 시각만 넣으면 다음 수유 시각부터 24시간 수유 스케줄 표를 만들어 드립니다. 결과는 링크 하나로 공유할 수 있습니다.">
+<meta property="og:url" content="https://richoh86.github.io/lullog-site/ko/tools/suyu-teom-gyesangi.html">
+<meta property="og:image" content="https://richoh86.github.io/lullog-site/assets/og.png">
+<meta property="og:image:alt" content="Lullog 수유텀 계산기">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  /* 공용 시트에 없는 것만 최소로: 결과 영역의 공유 URL 입력과 복사 버튼 */
+  .result input[type="text"] { width: 100%; box-sizing: border-box; padding: .55rem .6rem; font-size: .95rem;
+    border: 1px solid var(--line); border-radius: .45rem; background: var(--bg); color: var(--ink); }
+  .result button { padding: .5rem 1rem; font-size: .95rem; border: 0; border-radius: .45rem;
+    background: var(--accent); color: #fff; cursor: pointer; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "수유텀 계산기",
+  "url": "https://richoh86.github.io/lullog-site/ko/tools/suyu-teom-gyesangi.html",
+  "inLanguage": "ko",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "JavaScript를 지원하는 모든 브라우저",
+  "isAccessibleForFree": true,
+  "description": "아기 월령과 마지막 수유 시각으로 다음 수유 시각부터 24시간 수유 스케줄을 계산하고, 결과를 링크로 공유하는 무료 웹 도구입니다.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "publisher": { "@type": "Organization", "name": "Lullog" }
+}
+</script>
+</head>
+<body>
+<nav class="crumbs"><a href="../index.html">홈</a> › 도구 › 수유텀 계산기</nav>
+
+<h1>수유텀 계산기</h1>
+<p class="sub">다음 수유 시각부터 24시간치 수유 스케줄을 표로 만들어 드려요. 결과는 링크 하나로 공유할 수 있습니다.</p>
+
+<p class="lede">가입도, 이메일도, 앱 설치도 필요 없습니다. 계산 결과가 주소창에 그대로 담기기 때문에, 그 주소를 배우자·조부모·시터에게 보내면 같은 스케줄을 그대로 보게 됩니다.</p>
+
+<form class="calc" id="form" autocomplete="off">
+  <label for="mode">수유 방식</label>
+  <select id="mode" name="mode">
+    <option value="breast">모유</option>
+    <option value="formula" selected>분유</option>
+    <option value="mixed">혼합(모유 + 분유)</option>
+  </select>
+
+  <label for="age">아기 월령</label>
+  <select id="age" name="age">
+    <option value="0">0개월 (신생아)</option>
+    <option value="1">1개월</option>
+    <option value="2" selected>2개월</option>
+    <option value="3">3개월</option>
+    <option value="4">4개월</option>
+    <option value="5">5개월</option>
+    <option value="6">6개월</option>
+    <option value="7">7개월</option>
+    <option value="8">8개월</option>
+    <option value="9">9개월</option>
+    <option value="10">10개월</option>
+    <option value="11">11개월</option>
+    <option value="12">12개월</option>
+  </select>
+
+  <label for="weight">아기 체중 (kg) — 선택 입력</label>
+  <input type="number" id="weight" name="weight" min="1" max="20" step="0.1" placeholder="예: 5.2 (분유·혼합일 때 수유량 추정에 사용)">
+
+  <label for="last">마지막 수유를 시작한 시각</label>
+  <input type="time" id="last" name="last" value="07:30">
+
+  <label for="gap">수유 간격 (시간)</label>
+  <input type="number" id="gap" name="gap" min="0.5" max="12" step="0.5" value="3">
+  <p class="note" id="gapHint"></p>
+
+  <button type="submit" id="go">수유 스케줄 계산하기</button>
+  <p class="note" id="formError" role="status"></p>
+</form>
+
+<div class="result" id="result" hidden></div>
+
+<h2>월령별 일반 범위 (참고표)</h2>
+<table>
+  <thead>
+    <tr><th>월령</th><th>수유 간격</th><th>하루 수유 횟수</th><th>분유 기준 양</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0~1개월</td><td>2~3시간</td><td>8~12회</td><td>체중 1kg당 하루 150~200ml<br>(생후 첫 주는 1회 30~60ml부터)</td></tr>
+    <tr><td>2~4개월</td><td>3~4시간</td><td>5~8회</td><td>체중 1kg당 하루 150~200ml</td></tr>
+    <tr><td>5~6개월</td><td>4~6시간</td><td>4~6회</td><td>1회 160~200ml, 하루 800~1,000ml</td></tr>
+    <tr><td>7~9개월</td><td>5~6시간</td><td>3~5회</td><td>1회 160~240ml, 하루 700~800ml<br>(이유식 2회 병행)</td></tr>
+    <tr><td>10~12개월</td><td>자료 없음<sup>*</sup></td><td>2~3회</td><td>체중 1kg당 하루 90~100ml, 하루 600~800ml<br>(이유식 3회 병행)</td></tr>
+  </tbody>
+</table>
+<p class="note"><sup>*</sup> 10~12개월의 수유 “간격”은 아래 공공 자료에 수치가 나와 있지 않습니다. 계산기 기본값은 7~9개월 기준(5~6시간)을 그대로 둔 것이니, 아기의 이유식 일정에 맞춰 직접 바꿔서 쓰세요.</p>
+
+<h3>이 숫자의 출처</h3>
+<ul class="note">
+  <li>수유 간격·횟수, 월령별 분유량: <a href="https://www.childcare.go.kr/?menuno=422" target="_blank" rel="noopener">임신육아종합포털 아이사랑 — 신생아 수유</a>, <a href="https://www.childcare.go.kr/?menuno=429" target="_blank" rel="noopener">1~3개월</a>, <a href="https://www.childcare.go.kr/?menuno=437" target="_blank" rel="noopener">4~6개월</a>, <a href="https://www.childcare.go.kr/?menuno=443" target="_blank" rel="noopener">7~9개월</a>, <a href="https://www.childcare.go.kr/?menuno=449" target="_blank" rel="noopener">10~12개월</a> (보건복지부)</li>
+  <li>모유는 아기가 원할 때마다, 하루 8~12회 이상: <a href="https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntnts_sn=6586" target="_blank" rel="noopener">질병관리청 국가건강정보포털 — 성공적인 모유 수유</a></li>
+  <li>생후 6개월까지 하루 체중 1kg당 150~200ml: <a href="https://www.nottinghamshirehealthcare.nhs.uk/bis-formula-feeding/" target="_blank" rel="noopener">NHS (Nottinghamshire Healthcare NHS Foundation Trust) — Formula feeding</a></li>
+  <li>하루 총량은 평균 약 960ml(32oz)를 넘지 않게: <a href="https://www.healthychildren.org/English/ages-stages/baby/formula-feeding/Pages/amount-and-schedule-of-formula-feedings.aspx" target="_blank" rel="noopener">미국소아과학회(AAP) HealthyChildren — Amount and Schedule of Baby Formula Feedings</a></li>
+</ul>
+
+<p class="disclaim">
+  이 계산 결과는 공공 보건 자료의 <strong>일반 범위를 바탕으로 한 참고용 추정</strong>이며, 의료 조언이 아닙니다.
+  아기마다 먹는 양과 간격은 크게 다르고, 같은 아기도 날마다 달라집니다. 시계보다 아기의 배고픔 신호를 먼저 보세요.
+  실제 수유량과 체중 증가는 반드시 소아청소년과 진료에서 확인하시고,
+  <strong>수유 거부, 체중 증가 부진, 소변량(기저귀 수)의 갑작스러운 감소, 축 처짐, 발열</strong> 같은 신호가 보이면
+  이 계산기를 참고하지 마시고 즉시 진료를 받으세요.
+</p>
+
+<h2>매번 링크를 새로 만들기 번거롭다면</h2>
+<p>이 계산기는 “예상” 스케줄을 링크로 보내는 도구예요. 실제로 먹인 시각과 양을 그때그때 기록해서 <strong>아기 기록 자체를 링크 하나로</strong> 함께 보고 싶다면 <a href="../index.html">Lullog 앱</a>을 살펴보세요. 한 번 만든 링크를 배우자·조부모·시터가 브라우저로 열어 보고 기록도 추가할 수 있습니다. (현재 App Store 출시 전으로 TestFlight 심사 중입니다.)</p>
+<p class="note">종이에 손으로 적는 쪽이 편하다면 <a href="../print/suyu-girokji.html">가입 없이 바로 뽑는 수유·수면·기저귀 기록지</a>도 있습니다.</p>
+
+<footer><a href="../index.html">Lullog 홈</a> · © 2026 Lullog</footer>
+
+<script>
+/* CALC-CORE-START */
+(function (root) {
+  'use strict';
+
+  var MODES = { breast: '모유', formula: '분유', mixed: '혼합(모유 + 분유)' };
+
+  /* 월령별 일반 범위. 출처는 페이지 본문 "이 숫자의 출처" 참고. */
+  var AGE_BANDS = [
+    { min: 0,  max: 1,  label: '0~1개월',   gapMin: 2, gapMax: 3, gapDefault: 2.5, feedMin: 8, feedMax: 12 },
+    { min: 2,  max: 4,  label: '2~4개월',   gapMin: 3, gapMax: 4, gapDefault: 3.5, feedMin: 5, feedMax: 8 },
+    { min: 5,  max: 6,  label: '5~6개월',   gapMin: 4, gapMax: 6, gapDefault: 5,   feedMin: 4, feedMax: 6 },
+    { min: 7,  max: 9,  label: '7~9개월',   gapMin: 5, gapMax: 6, gapDefault: 5.5, feedMin: 3, feedMax: 5 },
+    { min: 10, max: 12, label: '10~12개월', gapMin: 5, gapMax: 6, gapDefault: 5.5, feedMin: 2, feedMax: 3 }
+  ];
+
+  var DAILY_CAP_ML = 960; /* AAP: 24시간 평균 약 32oz(960ml)를 넘지 않게 */
+
+  function bandFor(ageMonths) {
+    var a = Number(ageMonths);
+    if (!isFinite(a)) return null;
+    for (var i = 0; i < AGE_BANDS.length; i++) {
+      if (a >= AGE_BANDS[i].min && a <= AGE_BANDS[i].max) return AGE_BANDS[i];
+    }
+    return null;
+  }
+
+  function parseTime(s) {
+    if (typeof s !== 'string') return null;
+    var m = /^(\d{1,2}):(\d{2})$/.exec(s.trim());
+    if (!m) return null;
+    var h = Number(m[1]), mi = Number(m[2]);
+    if (h < 0 || h > 23 || mi < 0 || mi > 59) return null;
+    return h * 60 + mi;
+  }
+
+  function formatAbs(totalMinutes) {
+    var day = Math.floor(totalMinutes / 1440);
+    var t = ((totalMinutes % 1440) + 1440) % 1440;
+    var h = Math.floor(t / 60), mi = t % 60;
+    return { time: (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi, day: day };
+  }
+
+  /* 순수 함수: 마지막 수유 시각 + 간격 -> 앞으로 24시간치 수유 예상 시각 */
+  function nextFeeds(lastTime, gapHours, windowHours) {
+    var hours = (windowHours === undefined || windowHours === null) ? 24 : Number(windowHours);
+    var start = parseTime(lastTime);
+    if (start === null) {
+      return { ok: false, error: '마지막 수유 시각을 24시간 형식(예: 07:30)으로 입력해 주세요.' };
+    }
+    var gap = Number(gapHours);
+    if (!isFinite(gap) || gap <= 0) {
+      return { ok: false, error: '수유 간격은 0보다 큰 숫자여야 합니다.' };
+    }
+    if (gap < 0.5 || gap > 12) {
+      return { ok: false, error: '수유 간격은 0.5시간에서 12시간 사이로 입력해 주세요.' };
+    }
+    if (!isFinite(hours) || hours <= 0) {
+      return { ok: false, error: '계산할 시간 범위가 올바르지 않습니다.' };
+    }
+    var step = Math.round(gap * 60);
+    var feeds = [];
+    var offset = 0, n = 1;
+    while (offset < hours * 60) {
+      var abs = start + step + offset;
+      var f = formatAbs(abs);
+      feeds.push({ n: n, time: f.time, day: f.day, minutesFromLast: step + offset });
+      offset += step;
+      n += 1;
+    }
+    return {
+      ok: true,
+      gap: gap,
+      feeds: feeds,
+      count: feeds.length,
+      perDay: Math.round((24 * 60 / step) * 10) / 10,
+      perDayRounded: Math.round(24 * 60 / step)
+    };
+  }
+
+  /* 순수 함수: 분유·혼합일 때만 1일/1회 수유량 추정. 모유는 ml 추정을 하지 않음. */
+  function dailyVolume(mode, ageMonths, weightKg, feedsPerDay) {
+    if (mode === 'breast') {
+      return { ok: false, reason: 'breast' };
+    }
+    if (mode !== 'formula' && mode !== 'mixed') {
+      return { ok: false, reason: 'mode' };
+    }
+    var age = Number(ageMonths);
+    if (!isFinite(age) || age < 0 || age > 12) {
+      return { ok: false, reason: 'age' };
+    }
+    if (weightKg === '' || weightKg === null || weightKg === undefined) {
+      return { ok: false, reason: 'noweight' };
+    }
+    var w = Number(weightKg);
+    if (!isFinite(w)) return { ok: false, reason: 'noweight' };
+    if (w < 1 || w > 20) return { ok: false, reason: 'range' };
+
+    var lowPerKg, highPerKg, basis;
+    if (age < 6) {
+      lowPerKg = 150; highPerKg = 200;
+      basis = '생후 6개월까지 하루 체중 1kg당 150~200ml (NHS)';
+    } else {
+      lowPerKg = 90; highPerKg = 100;
+      basis = '6~12개월은 하루 체중 1kg당 약 90~100ml (임신육아종합포털 아이사랑)';
+    }
+
+    var low = Math.round(w * lowPerKg);
+    var high = Math.round(w * highPerKg);
+    var capped = false;
+    if (high > DAILY_CAP_ML) { high = DAILY_CAP_ML; capped = true; }
+    if (low > DAILY_CAP_ML) { low = DAILY_CAP_ML; }
+
+    var perFeed = null;
+    var n = Number(feedsPerDay);
+    if (isFinite(n) && n > 0) {
+      perFeed = {
+        low: Math.round(low / n / 5) * 5,
+        high: Math.round(high / n / 5) * 5
+      };
+    }
+    return {
+      ok: true,
+      mode: mode,
+      weight: w,
+      perKg: { low: lowPerKg, high: highPerKg },
+      daily: { low: low, high: high },
+      perFeed: perFeed,
+      capped: capped,
+      cap: DAILY_CAP_ML,
+      basis: basis
+    };
+  }
+
+  /* 순수 함수: 입력 상태 <-> 쿼리스트링 */
+  function buildQuery(state) {
+    var mode = MODES[state.mode] ? state.mode : 'formula';
+    var age = String(Math.max(0, Math.min(12, Math.round(Number(state.age) || 0))));
+    var last = parseTime(state.last) === null ? '' : String(state.last).trim();
+    var gapNum = Number(state.gap);
+    var gap = isFinite(gapNum) ? String(gapNum) : '';
+    var parts = ['m=' + mode, 'age=' + age];
+    var w = state.weight;
+    if (w !== '' && w !== null && w !== undefined && isFinite(Number(w))) {
+      parts.push('w=' + String(Number(w)));
+    }
+    if (last) parts.push('last=' + last);
+    if (gap) parts.push('gap=' + gap);
+    return '?' + parts.join('&');
+  }
+
+  function parseQuery(search) {
+    var qs = String(search || '');
+    if (qs.charAt(0) === '?') qs = qs.slice(1);
+    var out = { mode: null, age: null, weight: '', last: null, gap: null, hasAny: false };
+    if (!qs) return out;
+    var pairs = qs.split('&');
+    for (var i = 0; i < pairs.length; i++) {
+      if (!pairs[i]) continue;
+      var eq = pairs[i].indexOf('=');
+      var k = eq < 0 ? pairs[i] : pairs[i].slice(0, eq);
+      var v = eq < 0 ? '' : decodeURIComponent(pairs[i].slice(eq + 1).replace(/\+/g, ' '));
+      if (k === 'm' && MODES[v]) { out.mode = v; out.hasAny = true; }
+      else if (k === 'age') {
+        var a = Number(v);
+        if (isFinite(a) && a >= 0 && a <= 12) { out.age = String(Math.round(a)); out.hasAny = true; }
+      } else if (k === 'w') {
+        var w2 = Number(v);
+        if (v !== '' && isFinite(w2) && w2 > 0) { out.weight = String(w2); out.hasAny = true; }
+      } else if (k === 'last') {
+        if (parseTime(v) !== null) { out.last = v; out.hasAny = true; }
+      } else if (k === 'gap') {
+        var g = Number(v);
+        if (isFinite(g) && g > 0) { out.gap = String(g); out.hasAny = true; }
+      }
+    }
+    return out;
+  }
+
+  root.lullogCalc = {
+    nextFeeds: nextFeeds,
+    dailyVolume: dailyVolume,
+    buildQuery: buildQuery,
+    parseQuery: parseQuery,
+    bandFor: bandFor,
+    parseTime: parseTime,
+    AGE_BANDS: AGE_BANDS,
+    MODES: MODES,
+    DAILY_CAP_ML: DAILY_CAP_ML
+  };
+})(typeof window !== 'undefined' ? window : this);
+/* CALC-CORE-END */
+
+(function () {
+  'use strict';
+  var C = window.lullogCalc;
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('form'), modeEl = $('mode'), ageEl = $('age'), weightEl = $('weight'),
+      lastEl = $('last'), gapEl = $('gap'), gapHint = $('gapHint'),
+      errEl = $('formError'), resultEl = $('result');
+  var gapTouched = false;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function updateGapHint(force) {
+    var band = C.bandFor(ageEl.value);
+    if (!band) return;
+    gapHint.textContent = band.label + ' 일반 범위는 ' + band.gapMin + '~' + band.gapMax +
+      '시간, 하루 ' + band.feedMin + '~' + band.feedMax + '회입니다. 아기에 맞게 바꿔 주세요.';
+    if (force || !gapTouched) gapEl.value = String(band.gapDefault);
+  }
+
+  function readState() {
+    return {
+      mode: modeEl.value,
+      age: ageEl.value,
+      weight: weightEl.value.trim(),
+      last: lastEl.value,
+      gap: gapEl.value
+    };
+  }
+
+  function volumeBlock(state, feedCount) {
+    var band = C.bandFor(state.age);
+    var vol = C.dailyVolume(state.mode, state.age, state.weight, feedCount);
+    var h = '<h3>수유량</h3>';
+
+    if (state.mode === 'breast') {
+      return h + '<p>모유 수유는 아기가 실제로 먹은 양을 ml로 재지 않는 경우가 대부분이어서, 이 계산기는 모유를 선택하면 ml 추정을 하지 않습니다. ' +
+        '대신 <strong>수유 횟수와 간격</strong>으로 봐 주세요.</p>' +
+        '<p>' + esc(band ? band.label : '') + ' 일반 범위는 <strong>' + (band ? band.feedMin + '~' + band.feedMax : '8~12') +
+        '회</strong>, 간격 <strong>' + (band ? band.gapMin + '~' + band.gapMax : '2~3') + '시간</strong>입니다. ' +
+        '질병관리청 국가건강정보포털은 모유 수유를 아기가 원할 때마다, 하루 8~12회 이상, 밤에도 이어서 하도록 안내합니다. ' +
+        '충분히 먹고 있는지는 ml이 아니라 <strong>하루 기저귀 수(소변), 체중 증가, 아기의 만족감</strong>으로 확인하세요.</p>';
+    }
+
+    if (!vol.ok) {
+      if (vol.reason === 'noweight') {
+        return h + '<p>아기 체중을 넣지 않으셔서 수유량(ml) 추정은 건너뛰었습니다. 체중(kg)을 입력하면 1일 총량과 1회량 범위를 함께 보여 드려요.</p>' +
+          '<p>' + esc(band ? band.label : '') + ' 일반 범위는 하루 <strong>' + (band ? band.feedMin + '~' + band.feedMax : '') + '회</strong>입니다.</p>';
+      }
+      if (vol.reason === 'range') {
+        return h + '<p>체중은 1kg에서 20kg 사이로 입력해 주세요. 지금 값으로는 수유량을 추정하지 않았습니다.</p>';
+      }
+      return h + '<p>입력값으로는 수유량을 추정할 수 없어 건너뛰었습니다.</p>';
+    }
+
+    var out = h +
+      '<p>체중 <strong>' + vol.weight + 'kg</strong> 기준, 하루 총 <strong>' +
+      vol.daily.low + '~' + vol.daily.high + 'ml</strong> 정도를 일반 범위로 봅니다. ' +
+      '(기준: ' + esc(vol.basis) + ')</p>';
+    if (vol.perFeed) {
+      out += '<p>이 스케줄대로 하루 <strong>' + feedCount + '회</strong> 먹인다면 1회에 대략 <strong>' +
+        vol.perFeed.low + '~' + vol.perFeed.high + 'ml</strong>입니다.</p>';
+    }
+    if (vol.capped) {
+      out += '<p class="note">미국소아과학회(AAP)는 하루 평균 약 ' + vol.cap +
+        'ml(32oz)를 넘지 않도록 안내하고 있어, 상한을 ' + vol.cap + 'ml로 잘라 표시했습니다.</p>';
+    }
+    if (state.mode === 'mixed') {
+      out += '<p class="note">혼합 수유에서는 아기가 모유로 먹은 양만큼 분유가 줄어듭니다. 위 숫자는 <strong>분유만 먹였을 때의 상한</strong>으로만 참고하세요.</p>';
+    }
+    out += '<p class="note">범위가 넓은 이유는 아기마다 필요한 양이 정말 다르기 때문입니다. 아기가 남기면 억지로 먹이지 마세요.</p>';
+    return out;
+  }
+
+  function render(state) {
+    var res = C.nextFeeds(state.last, state.gap, 24);
+    if (!res.ok) {
+      resultEl.hidden = true;
+      resultEl.innerHTML = '';
+      errEl.textContent = res.error;
+      return false;
+    }
+    var wNum = state.weight === '' ? null : Number(state.weight);
+    if (wNum !== null && (!isFinite(wNum) || wNum < 1 || wNum > 20)) {
+      errEl.textContent = '체중은 1kg에서 20kg 사이의 숫자로 입력하거나 비워 두세요.';
+      resultEl.hidden = true;
+      resultEl.innerHTML = '';
+      return false;
+    }
+    errEl.textContent = '';
+
+    var first = res.feeds[0];
+    var last = res.feeds[res.feeds.length - 1];
+    var rows = '';
+    for (var i = 0; i < res.feeds.length; i++) {
+      var f = res.feeds[i];
+      rows += '<tr><td>' + f.n + '회차</td><td>' + f.time +
+        (f.day > 0 ? ' <span class="note">(+' + f.day + '일)</span>' : '') +
+        '</td><td>' + f.n + '</td></tr>';
+    }
+
+    var html = '<h2>계산 결과</h2>' +
+      '<p><strong>' + C.MODES[state.mode] + '</strong> · <strong>' + state.age + '개월</strong> · 간격 <strong>' +
+      res.gap + '시간</strong> · 마지막 수유 <strong>' + esc(state.last) + '</strong></p>' +
+      '<p>다음 수유는 <strong>' + first.time + (first.day > 0 ? ' (다음 날)' : '') +
+      '</strong>쯤으로 예상돼요. 여기서부터 24시간 동안 <strong>' + res.count + '회</strong>, ' +
+      '하루 기준으로는 약 <strong>' + res.perDayRounded + '회</strong>입니다. ' +
+      '마지막 회차는 ' + last.time + (last.day > 0 ? ' (+' + last.day + '일)' : '') + '입니다.</p>' +
+      '<table><thead><tr><th>회차</th><th>예상 시각</th><th>누적 횟수</th></tr></thead><tbody>' +
+      rows + '</tbody></table>' +
+      volumeBlock(state, res.count) +
+      '<h3>이 결과를 그대로 공유하기</h3>' +
+      '<p class="note">아래 주소에 입력값이 모두 담겨 있습니다. 배우자·조부모·시터에게 보내면 같은 결과 화면이 열립니다.</p>' +
+      '<p><button type="button" id="copyBtn">결과 링크 복사</button> <span id="copyMsg" role="status"></span></p>' +
+      '<label for="shareUrl" class="note">직접 복사하려면 (길게 눌러 전체 선택)</label>' +
+      '<input type="text" id="shareUrl" readonly value="">' +
+      '<p class="disclaim">참고용 추정이며 의료 조언이 아닙니다. 아기의 실제 수유량과 체중 증가는 소아청소년과와 상의하세요. ' +
+      '수유 거부, 체중 증가 부진, 소변량(기저귀 수) 급감, 축 처짐, 발열이 보이면 즉시 진료를 받으세요.</p>';
+
+    resultEl.innerHTML = html;
+    resultEl.hidden = false;
+
+    var shareInput = document.getElementById('shareUrl');
+    shareInput.value = location.href;
+    shareInput.addEventListener('focus', function () { this.select(); });
+
+    document.getElementById('copyBtn').addEventListener('click', function () {
+      var msg = document.getElementById('copyMsg');
+      var url = location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          msg.textContent = '복사했습니다. 붙여넣기 해서 보내 주세요.';
+        }, function () {
+          msg.textContent = '복사가 막혀 있어요. 아래 주소를 직접 선택해 복사해 주세요.';
+        });
+      } else {
+        msg.textContent = '이 브라우저는 자동 복사를 지원하지 않아요. 아래 주소를 직접 선택해 복사해 주세요.';
+      }
+    });
+    return true;
+  }
+
+  function syncUrl(state) {
+    try {
+      history.replaceState(null, '', location.pathname + C.buildQuery(state));
+    } catch (e) { /* file:// 등에서 막히면 주소만 그대로 둡니다 */ }
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var state = readState();
+    if (render(state)) {
+      syncUrl(state);
+      var el = document.getElementById('shareUrl');
+      if (el) el.value = location.href;
+      resultEl.scrollIntoView({ block: 'start' });
+    }
+  });
+
+  ageEl.addEventListener('change', function () { updateGapHint(true); gapTouched = false; });
+  gapEl.addEventListener('input', function () { gapTouched = true; });
+
+  var q = C.parseQuery(location.search);
+  if (q.hasAny) {
+    if (q.mode) modeEl.value = q.mode;
+    if (q.age !== null) ageEl.value = q.age;
+    if (q.weight !== '') weightEl.value = q.weight;
+    if (q.last) lastEl.value = q.last;
+    updateGapHint(true);
+    if (q.gap !== null) { gapEl.value = q.gap; gapTouched = true; }
+    render(readState());
+  } else {
+    updateGapHint(true);
+  }
+})();
+</script>
+</body>
+</html>

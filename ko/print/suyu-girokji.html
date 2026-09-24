@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>수유 기록지 인쇄 · 수면 기저귀 기록지 | Lullog</title>
+<meta name="description" content="가입도 이메일도 없이 바로 인쇄하는 아기 수유·수면·기저귀 기록지입니다. A4 한 장에 하루치 18칸, 1일분과 7일분 중에서 골라 뽑을 수 있습니다.">
+<link rel="canonical" href="https://richoh86.github.io/lullog-site/ko/print/suyu-girokji.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lullog">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="수유 기록지 인쇄 · 수면 기저귀 기록지">
+<meta property="og:description" content="가입도 이메일도 없이 바로 인쇄하는 아기 수유·수면·기저귀 기록지입니다. A4 한 장에 하루치, 1일분과 7일분 중에서 고르세요.">
+<meta property="og:url" content="https://richoh86.github.io/lullog-site/ko/print/suyu-girokji.html">
+<meta property="og:image" content="https://richoh86.github.io/lullog-site/assets/og.png">
+<meta property="og:image:alt" content="Lullog 수유·수면·기저귀 인쇄용 기록지">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  /* 공용 시트에 없는 것만 최소로: 기록지 표의 인쇄 레이아웃 */
+  .sheet { margin: 0 0 2.5rem; }
+  .sheet-head { display: flex; flex-wrap: wrap; gap: .8rem; margin: 0 0 .5rem; font-size: .95rem; }
+  .sheet-head span { flex: 1 1 11rem; border-bottom: 1px solid var(--line); padding: .25rem .2rem; }
+  .log th { text-align: center; font-size: .85rem; padding: .3rem .25rem; }
+  .log td { height: 1.7rem; }
+  .log .t { width: 4.2rem; }
+  .log col.c-t { width: 10%; } .log col.c-f { width: 9%; } .log col.c-s { width: 9%; }
+  .log col.c-d { width: 7%; } .log col.c-m { width: 31%; }
+  .sheet-foot { font-size: .8rem; color: var(--dim); margin: .35rem 0 0; }
+  @media print {
+    @page { size: A4 portrait; margin: 11mm 9mm; }
+    body { font-size: 10.5pt; }
+    h2.sheet-title { font-size: 12pt; margin: 0 0 3mm; }
+    .sheet-head { font-size: 10pt; gap: 5mm; margin-bottom: 2mm; }
+    .sheet-head span { border-bottom: 1px solid #666; }
+    .log { font-size: 9.5pt; margin: 0; width: 100%; table-layout: fixed; }
+    .log th, .log td { padding: .4mm 1mm; border: 1px solid #666; }
+    .log th { font-size: 8.5pt; }
+    .log td { height: 10.4mm; }
+    .sheet { margin: 0; page-break-after: auto; break-after: auto; }
+    /* 뒤따르는 장 "앞"에서만 끊습니다. 마지막 장 뒤에 빈 페이지가 생기지 않게. */
+    .sheet + .sheet { page-break-before: always; break-before: page; }
+    .sheet-foot { font-size: 7.5pt; color: #555; margin-top: 1.5mm; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "수유 기록지 인쇄 (수유·수면·기저귀)",
+  "url": "https://richoh86.github.io/lullog-site/ko/print/suyu-girokji.html",
+  "inLanguage": "ko",
+  "description": "가입도 이메일도 없이 바로 인쇄하는 아기 수유·수면·기저귀 기록지입니다. A4 세로 한 장에 하루치가 들어가며 1일분과 7일분 중에서 고를 수 있습니다.",
+  "isAccessibleForFree": true,
+  "isPartOf": { "@type": "WebSite", "name": "Lullog", "url": "https://richoh86.github.io/lullog-site/" },
+  "publisher": { "@type": "Organization", "name": "Lullog" }
+}
+</script>
+</head>
+<body>
+
+<div class="noprint">
+<nav class="crumbs"><a href="../index.html">홈</a> › 인쇄 자료 › 수유 기록지</nav>
+
+<h1>수유·수면·기저귀 기록지 인쇄</h1>
+<p class="sub">가입도, 이메일 입력도, 다운로드도 필요 없습니다. 아래 버튼을 누르면 기록지만 바로 인쇄됩니다.</p>
+
+<p class="lede">A4 세로 한 장에 하루치(18칸)가 들어갑니다. 이 화면의 안내 글은 인쇄되지 않고, <strong>기록지 표만</strong> 나옵니다. 1일분과 7일분 중에서 고르세요.</p>
+
+<div class="calc">
+  <label for="days">몇 장을 뽑을까요?</label>
+  <select id="days">
+    <option value="1" selected>1일분 (1장)</option>
+    <option value="3">3일분 (3장)</option>
+    <option value="7">7일분 (7장)</option>
+  </select>
+  <button type="button" id="printBtn">인쇄하기</button>
+  <p class="note" id="status" role="status">지금은 1일분(1장)이 준비되어 있습니다.</p>
+</div>
+
+<h2>쓰는 법</h2>
+<ul>
+  <li><strong>시각</strong> 칸에 먹이기 시작한 시각을 적습니다. 미리 채워 두지 않은 이유는 아기마다 리듬이 다르기 때문이에요.</li>
+  <li><strong>모유 좌·우</strong>는 먹인 분(分)을, <strong>분유</strong>는 먹인 ml를 적습니다. 혼합 수유면 둘 다 적으면 됩니다.</li>
+  <li><strong>수면</strong>은 잠든 시각과 깬 시각을, <strong>기저귀</strong>는 소변·대변에 각각 ✓를 표시합니다.</li>
+  <li><strong>메모</strong>에는 게운 정도, 약, 체온, 기분처럼 진료 때 이야기할 것을 적어 두면 좋습니다.</li>
+  <li>진료 때는 이 종이를 그대로 가져가세요. 며칠치를 나란히 보면 아기의 리듬이 눈에 보입니다.</li>
+</ul>
+
+<h2>인쇄가 잘 안 될 때</h2>
+<ul>
+  <li>용지는 <strong>A4 세로</strong>, 배율은 <strong>100%(맞춤 아님)</strong>로 두세요.</li>
+  <li>브라우저 인쇄 설정에서 <strong>머리글·바닥글</strong>을 끄면 표가 더 여유 있게 들어갑니다.</li>
+  <li>표가 두 장으로 나뉘면 여백을 “좁게”로 바꿔 보세요.</li>
+</ul>
+
+<p class="note">수유 간격이 궁금하시면 <a href="../tools/suyu-teom-gyesangi.html">수유텀 계산기</a>로 24시간 스케줄을 먼저 뽑아 보셔도 좋아요. 월령별 수유 정보는 <a href="../guides/">수유 가이드</a>에 정리해 두었습니다.</p>
+
+<p class="disclaim">이 기록지는 부모가 직접 적어 두기 위한 서식일 뿐, 의료 조언이나 진단 도구가 아닙니다. 수유 거부, 체중 증가 부진, 소변량(기저귀 수) 급감, 축 처짐, 발열이 보이면 기록을 채우기보다 먼저 소아청소년과 진료를 받으세요.</p>
+
+<hr>
+<h2>미리 보기</h2>
+</div>
+
+<div id="sheets"></div>
+
+<template id="sheetTpl">
+<section class="sheet">
+  <h2 class="sheet-title">아기 하루 기록 — 수유 · 수면 · 기저귀</h2>
+  <div class="sheet-head">
+    <span>아기 이름:</span>
+    <span>날짜:&nbsp;&nbsp;&nbsp;&nbsp;년&nbsp;&nbsp;&nbsp;&nbsp;월&nbsp;&nbsp;&nbsp;&nbsp;일</span>
+    <span>기록한 사람:</span>
+  </div>
+  <table class="log">
+    <colgroup>
+      <col class="c-t"><col class="c-f"><col class="c-f"><col class="c-f">
+      <col class="c-s"><col class="c-s"><col class="c-d"><col class="c-d"><col class="c-m">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="t" rowspan="2">시각</th>
+        <th colspan="3">수유</th>
+        <th colspan="2">수면</th>
+        <th colspan="2">기저귀</th>
+        <th rowspan="2">메모</th>
+      </tr>
+      <tr>
+        <th>모유 좌(분)</th>
+        <th>모유 우(분)</th>
+        <th>분유(ml)</th>
+        <th>시작</th>
+        <th>종료</th>
+        <th>소변</th>
+        <th>대변</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="t"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="sheet-foot">오늘 총 수유 ______회 · 소변 ______회 · 대변 ______회 · 총 수면 ______시간 &nbsp;|&nbsp; Lullog — 참고용 기록지이며 의료 조언이 아닙니다.</p>
+</section>
+</template>
+
+<footer class="noprint"><a href="../index.html">Lullog 홈</a> · <a href="../tools/suyu-teom-gyesangi.html">수유텀 계산기</a> · © 2026 Lullog</footer>
+
+<script>
+(function () {
+  'use strict';
+  var tpl = document.getElementById('sheetTpl');
+  var host = document.getElementById('sheets');
+  var daysEl = document.getElementById('days');
+  var statusEl = document.getElementById('status');
+
+  function build(n) {
+    host.innerHTML = '';
+    for (var i = 0; i < n; i++) {
+      host.appendChild(tpl.content.cloneNode(true));
+    }
+    statusEl.textContent = '지금은 ' + n + '일분(' + n + '장)이 준비되어 있습니다.';
+  }
+
+  daysEl.addEventListener('change', function () {
+    build(parseInt(daysEl.value, 10) || 1);
+  });
+
+  document.getElementById('printBtn').addEventListener('click', function () {
+    window.print();
+  });
+
+  build(1);
+})();
+</script>
+</body>
+</html>
