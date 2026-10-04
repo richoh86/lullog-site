@@ -52,11 +52,12 @@
       <li>오프라인 우선</li>
       <li>광고 없음</li>
       <li>회원가입 없음</li>
+      <li>잠금화면에서 정지</li>
       <li>공동양육자는 링크 하나로</li>
     </ul>
   </div>
   <div class="phone">
-    <img src="../assets/screens/ko/home.webp" srcset="../assets/screens/ko/home.webp 540w, ../assets/screens/ko/home@2x.webp 1080w" sizes="(max-width: 720px) 74vw, 272px" width="540" height="1173" fetchpriority="high" alt="밤 시간의 Lullog 오늘 화면. 마지막 수유 2시간 14분 전, 마지막 수면 카드, 수유·수면·기저귀 큰 버튼과 오늘의 타임라인이 보입니다">
+    <img src="../assets/screens/ko/home.webp" srcset="../assets/screens/ko/home.webp 540w, ../assets/screens/ko/home@2x.webp 1080w" sizes="(max-width: 720px) 74vw, 272px" width="540" height="1174" fetchpriority="high" alt="밤 시간의 Lullog 오늘 화면. 수유 9회·350 ml, 수면 9시간 14분, 기저귀 8회 오늘 합계와 왼쪽으로 먹인 마지막 수유 2시간 14분 전, 마지막 수면 카드, 수유·수면·기저귀 큰 버튼, 오늘의 기록이 보입니다">
   </div>
 </section>
 
@@ -67,6 +68,7 @@
       <h2>깜빡 잊은 수유도 두 번이면 기록돼요</h2>
       <p>수유 버튼을 누르고 모유, 분유, 유축 중 하나를 고른 뒤 저장하면 끝입니다. 아기를 재우느라 기록을 놓쳤다면 시간 휠을 돌릴 필요 없이 "10분 전", "20분 전", "30분 전"을 누르세요.</p>
       <p class="dim">모유 수유는 좌우 타이머로, 분유는 ml로 남깁니다. 수면과 기저귀도 같은 방식이에요.</p>
+      <p class="dim">분유량은 5 ml 단위로 조절하거나 숫자를 눌러 바로 입력할 수 있어요. 저장하거나 타이머를 시작한 뒤 5초 동안은 실행 취소 버튼으로 되돌릴 수 있습니다.</p>
     </div>
     <div class="phone">
       <img src="../assets/screens/ko/log.webp" srcset="../assets/screens/ko/log.webp 540w, ../assets/screens/ko/log@2x.webp 1080w" sizes="(max-width: 720px) 74vw, 272px" width="540" height="1173" loading="lazy" decoding="async" alt="수유 기록 화면. 모유·분유·유축 선택, 20분 전이 선택된 빠른 시간 선택, 수유량 120 ml">
@@ -78,11 +80,29 @@
       <p class="kicker">한눈에 확인</p>
       <h2>앱을 열지 않아도 수유텀이 보여요</h2>
       <p>잠금화면 라이브 액티비티와 홈 화면 위젯이 마지막 수유와 마지막 수면 이후 지난 시간을 보여 줍니다. 비몽사몽한 새벽에도 두 시간이 지났는지 세 시간이 지났는지 바로 알 수 있어요.</p>
+      <p>오늘 화면 맨 위에는 오늘의 수유 횟수와 ml, 수면 시간, 기저귀 횟수 합계가 한 줄로 보여요. 마지막 수유 카드에는 마지막으로 먹인 쪽이 표시되고, 다음 수유는 반대쪽이 미리 선택돼요.</p>
       <p class="dim">Lullog는 지난 시간을 보여 줄 뿐, 다음 수유 시간을 예측하거나 아기에게 무엇이 필요한지 판단하지 않습니다.</p>
     </div>
     <div class="phone small">
-      <img src="../assets/screens/ko/home.webp" srcset="../assets/screens/ko/home.webp 540w, ../assets/screens/ko/home@2x.webp 1080w" sizes="(max-width: 720px) 66vw, 224px" width="540" height="1173" loading="lazy" decoding="async" alt="마지막 수유 2시간 14분 전이 크게 표시된 오늘 화면">
+      <img src="../assets/screens/ko/home.webp" srcset="../assets/screens/ko/home.webp 540w, ../assets/screens/ko/home@2x.webp 1080w" sizes="(max-width: 720px) 66vw, 224px" width="540" height="1174" loading="lazy" decoding="async" alt="맨 위 오늘 합계 줄과 마지막: 왼쪽 표시가 붙은 마지막 수유 2시간 14분 전 카드가 보이는 오늘 화면">
     </div>
+  </section>
+
+  <section class="feature">
+    <div>
+      <p class="kicker">잠금화면</p>
+      <h2>잠금을 풀지 않고 타이머를 멈춰요</h2>
+      <p>수면이나 모유 수유 타이머가 돌아가는 동안 잠금화면 라이브 액티비티에 타이머와 정지 버튼이 보입니다. 정지를 누르면 기록이 저장돼요. Face ID나 암호를 입력할 필요도, 아기를 내려놓을 필요도 없습니다.</p>
+      <p class="dim">잠금화면 타이머는 다른 기록 기능처럼 무료이고, 최신 버전의 Lullog에 들어 있어요.</p>
+    </div>
+    <figure class="lock-demo" aria-label="잠금화면 타이머를 표현한 그림">
+      <div class="lock-card" aria-hidden="true">
+        <span class="lock-label">Lullog · 수면</span>
+        <span class="lock-time">1:07:32</span>
+        <span class="lock-stop">정지</span>
+      </div>
+      <figcaption>설명용 그림이며 실제 화면이 아닙니다</figcaption>
+    </figure>
   </section>
 
   <section class="feature" id="sharing">
@@ -133,6 +153,7 @@
         <li>오늘 화면과 타임라인</li>
         <li>홈 화면 위젯</li>
         <li>잠금화면 라이브 액티비티</li>
+        <li>잠금화면 타이머·정지</li>
         <li>공동양육자 링크 공유, 인원 제한 없음</li>
         <li>광고 없음</li>
       </ul>
@@ -192,6 +213,7 @@
     "name": "Lullog",
     "alternateName": "Lullog: 아기 수유 기록·육아일지",
     "operatingSystem": "iOS 17.0 이상",
+    "softwareVersion": "1.0.1",
     "applicationCategory": "HealthApplication",
     "inLanguage": "ko",
     "url": "https://richoh86.github.io/lullog-site/ko/",
