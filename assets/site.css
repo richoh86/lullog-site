@@ -110,3 +110,15 @@ html[lang="ko"] body { word-break: keep-all; overflow-wrap: anywhere; }
 .feature .phone img { border-radius: 28px; }
 /* While a lazy screenshot is still loading, show the card colour instead of the bezel black */
 .phone img { background: var(--card); }
+
+/* ---------- Lock screen timer schematic (1.0.1), added 2026-10-04 ---------- */
+.lock-demo { margin: 0 auto; width: min(320px, 100%); text-align: center; }
+.lock-card { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; align-items: center;
+  gap: .25rem 1rem; text-align: left; padding: 1.1rem 1.25rem; border-radius: 1.6rem;
+  background: var(--card); border: 1px solid var(--line); box-sizing: border-box; }
+.lock-card .lock-label { grid-column: 1 / -1; color: var(--dim); font-size: .85rem; font-weight: 600; }
+.lock-card .lock-time { font: 600 2rem/1.1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color: var(--ink); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.lock-card .lock-stop { justify-self: end; padding: .4rem 1.1rem; border-radius: 999px;
+  background: var(--accent); color: var(--card); font-weight: 700; font-size: .95rem; }
+.lock-demo figcaption { margin-top: .6rem; color: var(--dim); font-size: .8rem; }

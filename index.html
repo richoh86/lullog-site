@@ -52,11 +52,12 @@
       <li>Works offline</li>
       <li>No ads</li>
       <li>No account</li>
+      <li>Stop from the lock screen</li>
       <li>One link for caregivers</li>
     </ul>
   </div>
   <div class="phone">
-    <img src="assets/screens/en/home.webp" srcset="assets/screens/en/home.webp 540w, assets/screens/en/home@2x.webp 1080w" sizes="(max-width: 720px) 74vw, 272px" width="540" height="1173" fetchpriority="high" alt="Lullog's Today screen at night: last feed 2 h 14 min ago, the last sleep, big Feed, Sleep and Diaper buttons, and today's timeline">
+    <img src="assets/screens/en/home.webp" srcset="assets/screens/en/home.webp 540w, assets/screens/en/home@2x.webp 1080w" sizes="(max-width: 720px) 74vw, 272px" width="540" height="1174" fetchpriority="high" alt="Lullog's Today screen at night: today's totals of 9 feeds, 350 ml, 9 h 14 min of sleep and 8 diapers, last feed 2 h 14 min ago on the left side, the last sleep, big Feed, Sleep and Diaper buttons, and today's timeline">
   </div>
 </section>
 
@@ -67,6 +68,7 @@
       <h2>Two taps, even if you forgot to log it</h2>
       <p>Tap Feed, choose breast, bottle or pump, and save. Fell asleep before you logged it? Pick "10 min ago", "20 min ago" or "30 min ago" instead of scrolling a time wheel.</p>
       <p class="dim">Breast feeds keep a left and right side timer. Bottle feeds take an amount in ml. Sleep and diapers work the same way.</p>
+      <p class="dim">Bottle amounts move in 5 ml steps, or tap the number to type it. For five seconds after any save or timer start, an Undo button takes it back.</p>
     </div>
     <div class="phone">
       <img src="assets/screens/en/log.webp" srcset="assets/screens/en/log.webp 540w, assets/screens/en/log@2x.webp 1080w" sizes="(max-width: 720px) 74vw, 272px" width="540" height="1173" loading="lazy" decoding="async" alt="The feed sheet with Breast, Bottle and Pump options, a quick time picker set to 20 minutes ago, and 120 ml entered">
@@ -78,11 +80,29 @@
       <p class="kicker">At a glance</p>
       <h2>See how long since the last feed without opening the app</h2>
       <p>A Live Activity on the lock screen and widgets on the home screen count up from the last feed and the last sleep. Half awake, you can tell in one look whether it has been two hours or three.</p>
+      <p>A strip at the top of the Today screen adds up today's feeds and ml, sleep and diapers. The last-feed card shows which breast side you used last, and the next feed is preselected to the other side.</p>
       <p class="dim">Lullog shows the time that has passed. It does not predict the next feed or tell you what your baby needs.</p>
     </div>
     <div class="phone small">
-      <img src="assets/screens/en/home.webp" srcset="assets/screens/en/home.webp 540w, assets/screens/en/home@2x.webp 1080w" sizes="(max-width: 720px) 66vw, 224px" width="540" height="1173" loading="lazy" decoding="async" alt="The Today screen showing a large card that reads last feed 2 h 14 min ago">
+      <img src="assets/screens/en/home.webp" srcset="assets/screens/en/home.webp 540w, assets/screens/en/home@2x.webp 1080w" sizes="(max-width: 720px) 66vw, 224px" width="540" height="1174" loading="lazy" decoding="async" alt="The Today screen with the totals strip at the top and a last feed card that reads 2 h 14 min ago with a Last: L badge">
     </div>
+  </section>
+
+  <section class="feature">
+    <div>
+      <p class="kicker">Lock screen</p>
+      <h2>Stop the timer without unlocking your phone</h2>
+      <p>When a sleep or breast-feed timer is running, it shows in the Live Activity on the lock screen with a Stop button. Tap Stop and the entry is saved, without Face ID or a passcode and without putting the baby down.</p>
+      <p class="dim">The lock screen timer is free, like all logging. It is in the latest version of Lullog.</p>
+    </div>
+    <figure class="lock-demo" aria-label="Illustration of the lock screen timer">
+      <div class="lock-card" aria-hidden="true">
+        <span class="lock-label">Lullog · Sleep</span>
+        <span class="lock-time">1:07:32</span>
+        <span class="lock-stop">Stop</span>
+      </div>
+      <figcaption>Illustration, not a screenshot</figcaption>
+    </figure>
   </section>
 
   <section class="feature" id="sharing">
@@ -133,6 +153,7 @@
         <li>Today screen and timeline</li>
         <li>Home screen widgets</li>
         <li>Lock screen Live Activity</li>
+        <li>Lock screen timer with Stop</li>
         <li>Link sharing with unlimited caregivers</li>
         <li>No ads</li>
       </ul>
@@ -189,6 +210,7 @@
       "applicationCategory": "HealthApplication",
       "applicationSubCategory": "Baby feeding, sleep and diaper log",
       "operatingSystem": "iOS 17.0 or later",
+      "softwareVersion": "1.0.1",
       "url": "https://richoh86.github.io/lullog-site/",
       "installUrl": "https://apps.apple.com/app/id6813064594",
       "downloadUrl": "https://apps.apple.com/app/id6813064594",
