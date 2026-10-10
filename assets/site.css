@@ -138,3 +138,24 @@ html[lang="ko"] body { word-break: keep-all; overflow-wrap: anywhere; }
 .voice-card .voice-result { grid-column: 1 / -1; justify-self: start; padding: .35rem 1rem; border-radius: 999px;
   border: 1px solid var(--line); background: var(--bg); color: var(--dim); font-size: .9rem; font-weight: 600; }
 .voice-demo figcaption { margin-top: .6rem; color: var(--dim); font-size: .8rem; }
+
+/* ---------- Lullog Plus (1.1), added 2026-10-10 ---------- */
+.plan.free { grid-column: 1 / -1; }
+.plan.free ul { columns: 2; column-gap: 2rem; }
+.plan.free li { break-inside: avoid; }
+.plan .tag { display: inline-block; margin: 0 0 .5rem; padding: .15rem .65rem; border-radius: 999px;
+  background: var(--accent); color: var(--card); font-size: .78rem; font-weight: 700; letter-spacing: .02em; }
+.pricing-note { grid-column: 1 / -1; margin: .2rem 0 0; color: var(--dim); font-size: .92rem; }
+.pricing-note + .pricing-note { margin-top: -.6rem; }
+.feature.wide { grid-template-columns: 1fr; }
+.plus-list { list-style: none; padding: 0; margin: 1.1rem 0 .9rem; display: grid; gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); }
+.plus-list li { display: grid; grid-template-columns: auto 1fr; column-gap: .75rem; align-items: start; margin: 0;
+  border: 1px solid var(--line); border-radius: .9rem; padding: .9rem 1rem; background: var(--card); }
+.plus-list svg { grid-row: span 2; width: 1.5rem; height: 1.5rem; margin-top: .1rem; color: var(--accent);
+  fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.plus-list strong { display: block; font-size: 1rem; line-height: 1.35; }
+.plus-list span { color: var(--dim); font-size: .92rem; line-height: 1.5; }
+@media (max-width: 720px) {
+  .plan.free ul { columns: 1; }
+}
