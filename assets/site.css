@@ -159,3 +159,10 @@ html[lang="ko"] body { word-break: keep-all; overflow-wrap: anywhere; }
 @media (max-width: 720px) {
   .plan.free ul { columns: 1; }
 }
+
+/* Plus screenshots (1.1), added 2026-10-13 */
+.plus-shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem; margin: 1.2rem 0 .4rem; }
+.plus-shots figure { margin: 0; }
+.plus-shots img { width: 100%; height: auto; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.18); display: block; }
+.plus-shots figcaption { text-align: center; color: var(--dim); font-size: .85rem; margin-top: .45rem; }
+@media (max-width: 720px) { .plus-shots { grid-template-columns: repeat(3, 1fr); gap: .5rem; } .plus-shots img { border-radius: 12px; } }
