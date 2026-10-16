@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-itunes-app" content="app-id=6813064594">
 <title>수유 기록지 인쇄 · 수면 기저귀 기록지 | Lullog</title>
 <meta name="description" content="가입도 이메일도 없이 바로 인쇄하는 아기 수유·수면·기저귀 기록지입니다. A4 한 장에 하루치 18칸, 1일분과 7일분 중에서 골라 뽑을 수 있습니다.">
 <link rel="canonical" href="https://richoh86.github.io/lullog-site/ko/print/suyu-girokji.html">
@@ -41,6 +42,7 @@
     /* 뒤따르는 장 "앞"에서만 끊습니다. 마지막 장 뒤에 빈 페이지가 생기지 않게. */
     .sheet + .sheet { page-break-before: always; break-before: page; }
     .sheet-foot { font-size: 7.5pt; color: #555; margin-top: 1.5mm; }
+    .app-line { display: none; }
   }
 </style>
 <script type="application/ld+json">
@@ -75,6 +77,7 @@
     <option value="7">7일분 (7장)</option>
   </select>
   <button type="button" id="printBtn">인쇄하기</button>
+  <p class="note app-line">종이 대신 잠금 화면 위젯으로 기록하고 싶다면 <a href="https://apps.apple.com/kr/app/id6813064594?ct=ko-print-widget">Lullog</a></p>
   <p class="note" id="status" role="status">지금은 1일분(1장)이 준비되어 있습니다.</p>
 </div>
 
@@ -164,7 +167,7 @@
 <aside class="store-cta">
   <img class="icon" src="../../assets/icon-180.png" alt="" width="56" height="56">
   <div class="text"><strong>Lullog — App Store에서 받기</strong><span>수유·수면·기저귀 기록은 무료, 광고 없음. 배우자·조부모와는 링크 하나로 함께 기록해요.</span></div>
-  <a class="badge" href="https://apps.apple.com/kr/app/id6813064594"><img src="../../assets/appstore-badge-ko-kr.svg" alt="App Store에서 다운로드" width="130" height="40"></a>
+  <a class="badge" href="https://apps.apple.com/kr/app/id6813064594?ct=ko-print-giroji"><img src="../../assets/appstore-badge-ko-kr.svg" alt="App Store에서 다운로드" width="130" height="40"></a>
 </aside>
 </div>
 
