@@ -43,7 +43,7 @@
 </head>
 <body>
 <h1>Privacy Policy</h1>
-<p class="sub">Lullog: Baby Feeding Tracker · Last updated 10 October 2026</p>
+<p class="sub">Lullog: Baby Feeding Tracker · Last updated 20 October 2026</p>
 <p style="color:var(--dim);font-size:.9rem;margin:0 0 1.25rem"><a href="ko/privacy.html" hreflang="ko" lang="ko">한국어</a></p>
 <p class="lede"><strong>Lullog keeps your baby's log on your phone.</strong> Nothing leaves the device unless you turn on sharing. There are no accounts, no ads, no analytics, no tracking, and no third-party SDKs.</p>
 
@@ -71,19 +71,26 @@
   <li>Your baby's name, date of birth, feeding style, and the log entries are sent to and stored on our relay server, hosted on Cloudflare Workers and Cloudflare D1.</li>
   <li>Access is controlled by random, unguessable link tokens. Anyone who has a link can see the log; a link you set to "Can view and log" can also add entries. There are no accounts or passwords.</li>
   <li>The server keeps a per-device identifier (a random ID from your iPhone, or the link token for web caregivers) on each entry so devices can merge changes. It stores no email, phone number, or payment data.</li>
-  <li>If you use the shared supply list (Lullog Plus), its items are sent to and stored on the same relay so every link can show them.</li>
+  <li>If you use the shared supply list, its items are sent to and stored on the same relay so every link can show them.</li>
   <li>You can revoke any link at any time. <strong>Stop sharing</strong> revokes every link and stops all network traffic; your log stays on your phone.</li>
 </ul>
 <p>The relay stores only what is needed to show the log to the people you invited. We do not read, sell, or use it for anything else.</p>
 
 <h2>Supply list, growth entries, reports and backups</h2>
-<p>These are part of Lullog Plus.</p>
+<p>The supply list is included for everyone, with no purchase. Supply alerts, growth entries, album tags, reports and backups are part of Lullog Plus.</p>
 <ul>
   <li><strong>Supply list:</strong> each item has a name (such as Diapers, Wipes or Formula), a status (OK, Low or Out) and an optional note. Items are stored on your iPhone. Only when you have turned sharing on are they synced through our relay on Cloudflare Workers, exactly like the log, so people with a link can see them, including on the web share page, and people with a "Can view and log" link can change them. With sharing off, the list never leaves your phone. The list is deleted from the server together with your log when you choose <em>Stop sharing and delete from server</em> or Settings → Delete all data.</li>
   <li><strong>Growth entries:</strong> weight, length, head circumference and any note you add are stored only on your iPhone. They are never uploaded or synced, even when sharing is on. Lullog shows the numbers you enter and does not interpret them.</li>
   <li><strong>Album tags:</strong> the tags you give photos (Daily, Growth, Documents, Milestone) are stored on your iPhone with the photos.</li>
   <li><strong>PDF reports and ZIP backups:</strong> both are created on your iPhone. A ZIP backup contains your log as JSON and CSV files plus your photos. Lullog never uploads them; they leave your phone only if you send or save them yourself through the iOS share sheet, and then they go only where you choose.</li>
   <li><strong>Deleting:</strong> Settings → Delete all data removes growth entries, supply list items and photo tags from your iPhone. Files you have already saved or sent elsewhere are not affected.</li>
+</ul>
+
+<h2>Notifications</h2>
+<ul>
+  <li><strong>Reminders:</strong> optional next-feed reminders (with quiet hours) and sleep-timer checks are local notifications scheduled on your iPhone. They are off until you turn them on, and nothing about them is sent to a server.</li>
+  <li><strong>Supply alerts (Lullog Plus):</strong> when someone with a link marks a supply Low or Out, Lullog shows a local notification on your iPhone. It is created by the app when it syncs with the relay (when Lullog is opened or open), not sent as a push notification. Lullog does not register your device for push notifications.</li>
+  <li>iOS asks for notification permission only when you turn on a reminder or alert. You can turn them off in Lullog or in iOS Settings at any time.</li>
 </ul>
 
 <h2>Purchases</h2>
