@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy - Lullog Baby Feeding Tracker for iOS</title>
-<meta name="description" content="Lullog keeps your baby log on your iPhone. No accounts, ads, tracking or third-party SDKs; only anonymous usage counts you can turn off.">
+<meta name="description" content="Lullog keeps your baby log on your iPhone. No accounts, ads, tracking or third-party SDKs; only anonymous usage counts you can turn off, and writing help text only if you turn it on.">
 <link rel="canonical" href="https://richoh86.github.io/lullog-site/privacy.html">
 <link rel="alternate" hreflang="en" href="https://richoh86.github.io/lullog-site/privacy.html">
 <link rel="alternate" hreflang="ko" href="https://richoh86.github.io/lullog-site/ko/privacy.html">
 <link rel="alternate" hreflang="x-default" href="https://richoh86.github.io/lullog-site/privacy.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Privacy Policy - Lullog Baby Feeding Tracker for iOS">
-<meta property="og:description" content="Lullog keeps your baby log on your iPhone. No accounts, ads, tracking or third-party SDKs; only anonymous usage counts you can turn off.">
+<meta property="og:description" content="Lullog keeps your baby log on your iPhone. No accounts, ads, tracking or third-party SDKs; only anonymous usage counts you can turn off, and writing help text only if you turn it on.">
 <meta property="og:url" content="https://richoh86.github.io/lullog-site/privacy.html">
 <meta property="og:site_name" content="Lullog">
 <meta property="og:locale" content="en_US">
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="Lullog privacy policy for the baby feeding tracker">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Privacy Policy - Lullog Baby Feeding Tracker for iOS">
-<meta name="twitter:description" content="Lullog keeps your baby log on your iPhone. No accounts, ads, tracking or third-party SDKs; only anonymous usage counts you can turn off.">
+<meta name="twitter:description" content="Lullog keeps your baby log on your iPhone. No accounts, ads, tracking or third-party SDKs; only anonymous usage counts you can turn off, and writing help text only if you turn it on.">
 <meta name="twitter:image" content="https://richoh86.github.io/lullog-site/assets/og.png">
 <style>
   :root { color-scheme: light dark;
@@ -43,9 +43,9 @@
 </head>
 <body>
 <h1>Privacy Policy</h1>
-<p class="sub">Lullog: Baby Feeding Tracker · Last updated 24 October 2026</p>
+<p class="sub">Lullog: Baby Feeding Tracker · Last updated 10 November 2026</p>
 <p style="color:var(--dim);font-size:.9rem;margin:0 0 1.25rem"><a href="ko/privacy.html" hreflang="ko" lang="ko">한국어</a></p>
-<p class="lede"><strong>Lullog keeps your baby's log on your phone.</strong> Your log leaves the device only if you turn on sharing. There are no accounts, no ads, no tracking, and no third-party SDKs. The only other thing the app sends is a few anonymous usage counts, which you can turn off in Settings.</p>
+<p class="lede"><strong>Lullog keeps your baby's log on your phone.</strong> Your log leaves the device only if you turn on sharing. There are no accounts, no ads, no tracking, and no third-party SDKs. The only other things the app sends are a few anonymous usage counts, which you can turn off in Settings, and, only if you turn it on, text for writing help.</p>
 
 <h2>What the app stores on your phone</h2>
 <ul>
@@ -77,17 +77,38 @@
   <li><strong>Turning it off:</strong> Settings → <em>Share anonymous usage stats</em>. You can turn it off at any time. Lullog then stops sending and deletes any counts still waiting on your phone.</li>
 </ul>
 
+<h2>Writing help (on this iPhone first, cloud only if you turn it on)</h2>
+<p>From version 1.4, three features can word short texts for you: the <em>Handover brief</em>, <em>Say it in one go</em>, and <em>Questions for the visit</em> in the Lullog Plus report.</p>
+<ul>
+  <li><strong>On this iPhone first:</strong> on iPhones with iOS 26 that support Apple's on-device model for the app's language, the wording is done entirely on your iPhone and nothing is sent anywhere.</li>
+  <li><strong>Cloud writing, only if you turn it on:</strong> on other iPhones, Lullog can send the minimum text a feature needs to Lullog's own server (the relay described under sharing below), which uses Anthropic's Claude to write the wording and sends it back. It is off by default and set separately for each feature. The first time a feature would need it, Lullog shows you exactly what would be sent and asks; if you choose <em>Not now</em>, you get the plain version and Lullog does not ask again. You can turn each feature on or off at any time with the switches in Settings → <em>Writing help</em>.</li>
+</ul>
+<p>What is sent, per feature, together with the language to write in:</p>
+<ul>
+  <li><strong>Handover brief:</strong> the brief's summary lines: a line for the time window it covers, and the counts and times shown in the app. Never your baby's name and never your notes.</li>
+  <li><strong>Say it in one go:</strong> the sentence you said, as the text recognised on your iPhone, and the current clock time. The voice recording never leaves your iPhone.</li>
+  <li><strong>Questions for the visit (Lullog Plus report):</strong> the report's weekly averages and the concerns you typed.</li>
+</ul>
+<p>Lullog never adds your baby's name or date of birth to these requests.</p>
+<ul>
+  <li><strong>What is kept:</strong> Lullog's server does not store or log the text it receives or the wording that comes back. To limit use, it keeps only a daily counter for a random writing-help ID, stored as a one-way hash. This ID is made only for writing help and is not linked to the anonymous usage counts ID or to sharing. The counters are deleted after 7 days.</li>
+  <li><strong>Anthropic:</strong> no IP address or device identifier is passed on to Anthropic. Anthropic processes the request to return the text, under its <a href="https://www.anthropic.com/legal/commercial-terms">commercial terms</a>. See also <a href="https://www.anthropic.com/legal/privacy">Anthropic's privacy policy</a>.</li>
+  <li><strong>Not medical advice:</strong> writing help only restates your own data and words. It does not interpret them, diagnose or give medical advice.</li>
+  <li>We do not use this text for ads, tracking or profiling.</li>
+  <li><strong>Turning it off:</strong> turn off a feature's switch in Settings → <em>Writing help</em>. Lullog stops sending for that feature right away.</li>
+</ul>
+
 <h2>Photos and voice</h2>
 <ul>
   <li><strong>Photos:</strong> you can attach a photo to a feed or diaper entry, or add a baby photo as its own moment with a caption. Photos and captions are stored only on your iPhone, in Lullog's private storage (an App Group container that only Lullog and its own extensions can read). They are never uploaded, never synced, never part of a share link, and not included in the CSV export, even when sharing is on. They are included in a ZIP backup only when you create one yourself (see below).</li>
   <li><strong>Camera and photo library:</strong> the camera is used only when you tap <em>Take photo</em>. Choosing an existing picture uses the system photo picker, so Lullog never asks for access to your photo library and sees only the picture you pick.</li>
-  <li><strong>Voice logging:</strong> the microphone button uses Apple's on-device speech recognition only. Audio is turned into text on your iPhone, is not stored, and nothing is sent to us or to any server. If on-device recognition is not available for your language, the button is hidden.</li>
+  <li><strong>Voice logging:</strong> the microphone button uses Apple's on-device speech recognition only. Audio is turned into text on your iPhone, is not stored, and is never sent to us or to any server. The text stays on your iPhone too, unless you turn on cloud writing help for <em>Say it in one go</em> (see Writing help above). If on-device recognition is not available for your language, the button is hidden.</li>
   <li><strong>Permissions:</strong> Lullog asks for microphone and speech recognition permission only when you tap the microphone button, and for camera permission only when you tap <em>Take photo</em>.</li>
   <li><strong>Deleting:</strong> removing an entry removes its photo. Settings → Delete all data removes every photo and caption.</li>
 </ul>
 
 <h2>Sharing with caregivers (optional, off by default)</h2>
-<p>Lullog can create a private web link so a partner, grandparent, or sitter can see and add entries from any browser without installing anything. This only happens after you tap <strong>Connect to sync</strong> in Settings → Share with caregivers. Until then nothing from your log is sent anywhere; the only network requests are the anonymous usage counts described above, if you leave them on.</p>
+<p>Lullog can create a private web link so a partner, grandparent, or sitter can see and add entries from any browser without installing anything. This only happens after you tap <strong>Connect to sync</strong> in Settings → Share with caregivers. Until then your log is not synced anywhere; the only network requests are the anonymous usage counts described above, if you leave them on, and writing help, only if you turn it on.</p>
 <p>When sharing is on:</p>
 <ul>
   <li>Your baby's name, date of birth, feeding style, and the log entries are sent to and stored on our relay server, hosted on Cloudflare Workers and Cloudflare D1.</li>
@@ -124,6 +145,7 @@
   <li><strong>On your phone:</strong> Settings → Delete all data removes every entry, every photo and caption, growth entries, supply list items, your baby's details, and all settings. Deleting the app does the same.</li>
   <li><strong>On the relay:</strong> Settings → Share with caregivers → Stop sharing → <em>Stop sharing and delete from server</em> permanently deletes the shared copy of your log, the shared supply list, every link, and your baby's details from our server, immediately. Settings → Delete all data does the same before erasing your phone. If you no longer have the app, email us with the share link and we will delete it within 30 days.</li>
   <li><strong>Usage counts:</strong> turning off Settings → <em>Share anonymous usage stats</em> stops sending and deletes any counts still waiting on your phone. Raw events already on the server are removed within 30 days; after that only totals with no install ID remain.</li>
+  <li><strong>Writing help:</strong> turning off the switches in Settings → <em>Writing help</em> stops sending. Lullog's server does not store the text or the wording, so there is nothing of it to delete; the daily counters are deleted automatically after 7 days.</li>
 </ul>
 
 <h2>Children</h2>
